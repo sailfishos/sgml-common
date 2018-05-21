@@ -1,0 +1,239 @@
+<refentry id="install-catalog">
+  <docinfo>
+    <author>
+      <firstname>Eric</firstname> <surname>Bischoff</surname>
+      <affiliation>
+        <address><email>ebisch@cybercable.tm.fr</email></address>
+      </affiliation>
+    </author>
+  </docinfo>
+  <refmeta>
+    <refentrytitle>install-catalog</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  
+  <refnamediv>
+    <refname>install-catalog</refname>
+    <refpurpose>Manage a SGML or XML centralized catalog</refpurpose>
+  </refnamediv>
+  
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>install-catalog</command>
+      <arg>option <synopfragmentref linkend="option"></synopfragmentref></arg>
+      <arg choice="req" rep="repeat">action <synopfragmentref linkend="action"></synopfragmentref></arg>
+
+      <synopfragment id="option"><group>
+        <arg><option>-d</option></arg>
+        <arg><option>--delegate</option></arg>
+      </group></synopfragment>
+
+      <synopfragment id="action"><group>
+        <arg><option>-a</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg>
+        <arg><option>--add</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg><sbr>
+        <arg><option>-r</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg>
+        <arg><option>--remove</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg><sbr>
+        <arg><option>-h</option></arg>
+        <arg><option>--help</option></arg><sbr>
+        <arg><option>-v</option></arg>
+        <arg><option>--version</option></arg>
+      </group></synopfragment>
+
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1>
+    <title>Description</title>
+
+    <para>This shell script allows to handle a centralized catalog
+    referencing other "ordinary" SGML or XML Open Catalogs.</para>
+
+    <para>An <firstterm>Open Catalog</firstterm> contains
+    a set of directives defined by OASIS, mostly used
+    for defining equivalences between FPIs (Formal Public
+    Identifiers) and real file names (see TR9401:1997 on <ulink
+    url="http://www.oasis-open.org">http://www.oasis-open.org</ulink>).
+    The Open Catalogs usually reside in
+    <filename>/usr/share/sgml</filename>.</para>
+
+    <para>A <firstterm>centralized catalog</firstterm> is a special
+    Open Catalog that includes only comments and CATALOG directives
+    pointing to other catalogs (or DELEGATE directives if supported). The
+    centralized catalog can be the key to all other SGML resources. It
+    usually resides in <filename>/etc/sgml</filename>.</para>
+
+    <para>The centralized catalog can be edited manually or through the
+    <application>install-catalog</application> script to add or remove
+    references to other ordinary catalogs. This script is mainly destined
+    to software package post-installation scripts.</para>
+
+    <para>An example of a typical call to install-catalog is:
+
+      <screen>
+      install-catalog --add \
+        /usr/share/sgml/docbook/dsssl-stylesheets-1.54/catalog \
+        /etc/sgml/sgml-docbook-4.0.cat
+      </screen>
+    </para>
+
+    <para>This call will install in
+    <filename>/etc/sgml/sgml-docbook-4.0.cat</filename> a reference to
+    <filename>/usr/share/sgml/docbook/dsssl-stylesheets-1.54/catalog</filename>.</para>
+
+  </refsect1>
+
+  <refsect1>
+    <title>Options</title>
+
+    <para>Here is the list of options that can influence the way
+    <application>install-catalog</application> works:</para>
+
+    <glosslist>
+      <glossentry>
+        <glossterm>
+          <cmdsynopsis><group>
+            <arg><option>-d</option></arg>
+            <arg><option>--delegate</option></arg>
+          </group></cmdsynopsis>
+        </glossterm>
+        <glossdef>
+          <para>Use DELEGATE instead of CATALOG directives to specify a pointer</para>
+        </glossdef>	  
+      </glossentry>
+
+    </glosslist>
+  </refsect1>
+
+  <refsect1>
+    <title>Actions</title>
+
+    <para>Here is the list of actions that can be requested to
+    <application>install-catalog</application>:</para>
+
+    <glosslist>
+      <glossentry>
+        <glossterm>
+          <cmdsynopsis><group>
+            <arg><option>-a</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg>
+            <arg><option>--add</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg>
+          </group></cmdsynopsis>
+        </glossterm>
+        <glossdef>
+          <para>Declare a new SGML package.</para>
+        </glossdef>	  
+      </glossentry>
+
+      <glossentry>
+        <glossterm>
+          <cmdsynopsis><group>
+            <arg><option>-r</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg>
+            <arg><option>--remove</option> <replaceable>centralized</replaceable> <replaceable>ordinary</replaceable></arg>
+          </group></cmdsynopsis>
+        </glossterm>
+        <glossdef>
+          <para>Remove a previously installed SGML package.</para> 
+        </glossdef>
+      </glossentry>
+
+      <glossentry>
+        <glossterm>
+          <cmdsynopsis><group>
+            <arg><option>-h</option></arg>
+            <arg><option>--help</option></arg>
+          </group></cmdsynopsis>
+        </glossterm>
+        <glossdef>
+          <para>Print a short help message and exit</para>
+        </glossdef>	  
+      </glossentry>
+
+      <glossentry>
+        <glossterm>
+          <cmdsynopsis><group>
+            <arg><option>-v</option></arg>
+            <arg><option>--version</option></arg>
+          </group></cmdsynopsis>
+        </glossterm>
+        <glossdef>
+          <para>Print the version identifier and exit</para>
+        </glossdef>	  
+      </glossentry>
+    </glosslist>      
+
+  </refsect1>
+
+  <refsect1>
+    <title>Files</title>
+    <glosslist>
+
+      <glossentry>
+        <glossterm>
+          <filename>/etc/sgml/*</filename>
+        </glossterm>
+        <glossdef>
+          <para>The SGML centralized catalogs</para>
+        </glossdef>
+      </glossentry>
+    </glosslist>
+  </refsect1>
+
+  <refsect1>
+    <title>Authors</title>
+    <glosslist>
+
+      <glossentry>
+        <glossterm>
+          Eric Bischoff <email>ebisch@cybercable.tm.fr</email>
+        </glossterm>
+        <glossdef>
+          <para>Developper of install-catalog.</para>
+        </glossdef>
+      </glossentry>
+
+    </glosslist>
+
+  </refsect1>
+
+  <refsect1>
+    <title>See Also</title>
+    <glosslist>
+
+      <glossentry>
+        <glossterm>
+          <citerefentry> <refentrytitle>jw</refentrytitle> <manvolnum>1</manvolnum> </citerefentry>
+        </glossterm>
+        <glossdef>
+          <para>conversion from DocBook to other file formats
+          </para>
+        </glossdef>
+      </glossentry>
+
+      <glossentry>
+        <glossterm>
+<!-- Next line  is a hack to force a paragraph break in the man-page. -->
+<cmdsynopsis> <command></command> </cmdsynopsis>
+          <citerefentry> <refentrytitle>nsgmls</refentrytitle> <manvolnum>1</manvolnum> </citerefentry>
+        </glossterm>
+        <glossdef>
+          <para>a base component of <application>Jade</application> DSSSL engine
+          </para>
+        </glossdef>
+      </glossentry>
+
+      <glossentry>
+        <glossterm>
+<!-- Next line  is a hack to force a paragraph break in the man-page. -->
+<cmdsynopsis> <command></command> </cmdsynopsis>
+          <ulink url="http://sourceware.cygnus.com/docbook-tools/">http://sourceware.cygnus.com/docbook-tools/</ulink></glossterm>
+        <glossdef>
+          <para>the home page of the DocBook tools, a compendium of
+          all tools necessary to process DocBook files, including
+          the SGML-common stuff.
+          </para>
+        </glossdef>
+      </glossentry>
+
+    </glosslist>
+  </refsect1>
+
+</refentry>

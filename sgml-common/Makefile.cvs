@@ -1,0 +1,7 @@
+all:
+	aclocal
+	automake -a
+	autoconf
+	rm -r `find . -name CVS`
+	@echo "The package is ready for being put in a tarball"
+	@echo "To install it, you can type: ./configure; make; make install"
