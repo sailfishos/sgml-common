@@ -135,8 +135,8 @@ fi
 %defattr (-,root,root, -)
 %doc __dist_doc/html/ AUTHORS NEWS ChangeLog COPYING README
 %dir %{_sysconfdir}/sgml
-%config(noreplace) %{_sysconfdir}/sgml/sgml.conf
-%ghost %verify(not md5 size mtime) %config(noreplace,missingok) %{_sysconfdir}/sgml/catalog
+%config %{_sysconfdir}/sgml/sgml.conf
+%ghost %verify(not md5 size mtime) %config(missingok) %{_sysconfdir}/sgml/catalog
 %dir %{_datadir}/sgml
 %dir %{_datadir}/sgml/sgml-iso-entities-8879.1986
 %{_datadir}/sgml/sgml-iso-entities-8879.1986/*
@@ -154,8 +154,8 @@ fi
 %dir %{_sysconfdir}/xml
 %dir %{_sysconfdir}/sgml
 %dir %{_sysconfdir}/sgml/docbook
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/xml/catalog
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/sgml/docbook/xmlcatalog
+%config %verify(not md5 size mtime) %{_sysconfdir}/xml/catalog
+%config %verify(not md5 size mtime) %{_sysconfdir}/sgml/docbook/xmlcatalog
 %dir %{_datadir}/sgml
 %dir %{_datadir}/sgml/docbook
 %{_datadir}/sgml/docbook/xmlcatalog
